@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Simple icon library (Font Awesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>Today</h1>
+        <!-- Maybe add profile/settings icons later -->
+    </header>
+
+    <main>
+        <section id="pending-section">
+            <h2>Pending</h2>
+            <ul id="pending-habits" class="habit-list">
+                <!-- Habit items will be loaded here by JS -->
+            </ul>
+        </section>
+
+        <section id="done-today-section">
+            <h2>Done Today</h2>
+            <ul id="done-today-habits" class="habit-list">
+                <!-- Habit items will be loaded here by JS -->
+            </ul>
+        </section>
+
+         <section id="done-this-week-section">
+            <h2>Done This Week (Weekly Habits)</h2>
+            <ul id="done-this-week-habits" class="habit-list">
+                <!-- Habit items will be loaded here by JS -->
+            </ul>
+        </section>
+
+         <section id="not-applicable-section" style="display: none;"> <!-- Hidden by default -->
+            <h2>Not Applicable Today</h2>
+            <ul id="not-applicable-today-habits" class="habit-list">
+                <!-- Habit items will be loaded here by JS -->
+            </ul>
+        </section>
+    </main>
+
+    <!-- Add Habit Button -->
+    <button id="add-habit-btn" class="fab">+</button>
+
+    <!-- Add Habit Modal -->
+    <div id="add-habit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">×</span>
+            <h2>Add New Habit</h2>
+            <form id="add-habit-form">
+                <label for="habit-name">Name (Text + Emoji):</label>
+                <input type="text" id="habit-name" name="name" required>
+
+                <label for="habit-frequency">Frequency:</label>
+                <select id="habit-frequency" name="frequency_type" required>
+                    <option value="daily_all">Daily (All Week)</option>
+                    <option value="daily_weekdays">Daily (Weekdays)</option>
+                    <option value="weekly">Weekly (Once)</option>
+                </select>
+
+                <button type="submit">Add Habit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Template for Habit Item (will be cloned by JS) -->
+    <template id="habit-item-template">
+         <li class="habit-item" data-habit-id="">
+            <span class="habit-name">Habit Name</span>
+            <div class="habit-actions">
+                <!-- Complete button shown only for pending -->
+                <button class="complete-btn" title="Mark Complete"><i class="fas fa-check"></i></button>
+                 <!-- Delete button always shown -->
+                <button class="delete-btn" title="Delete Habit"><i class="fas fa-trash-alt"></i></button>
+            </div>
+        </li>
+    </template>
+
+
+    <footer>
+        <!-- Basic Navigation Placeholder -->
+        <nav>
+            <a href="#" class="active"><i class="fas fa-home"></i></a>
+            <!-- Add icon handled by FAB -->
+            <a href="#"><i class="fas fa-chart-line"></i></a> <!-- Placeholder for stats -->
+        </nav>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

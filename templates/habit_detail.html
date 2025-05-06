@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title set dynamically or via Flask -->
+    <title>Habit Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Basic Calendar CSS (can be replaced with a library) -->
+    <style>
+        .calendar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-top: 20px; }
+        .calendar-day { padding: 10px; text-align: center; border: 1px solid #eee; border-radius: 4px; background-color: #f9f9f9; }
+        .calendar-header { font-weight: bold; background-color: #f0f0f0; }
+        .day-completed { background-color: #a3e9a4; color: #1d4d1e; } /* Green for completed */
+        .day-today { border: 2px solid #007bff; }
+         .day-empty { background-color: transparent; border: none; }
+    </style>
+</head>
+<body>
+    <header class="detail-header">
+        <a href="/" class="back-btn">< Back</a>
+        <!-- Habit name will be filled by JS -->
+        <h1 id="habit-detail-name">{{ habit_name }}</h1>
+        <!-- Placeholder for Edit/Delete icons -->
+    </header>
+
+    <main class="detail-main">
+        <!-- Store habit ID for JS -->
+        <div id="habit-data" data-habit-id="{{ habit_id }}" style="display: none;"></div>
+
+        <section class="stats-summary">
+             <!-- Simple display mimicking the circle/streaks -->
+             <div class="streak-info">
+                 <div>Current Streak: <span id="current-streak">0</span> days</div>
+                 <div>Best Streak: <span id="best-streak">0</span> days</div>
+                 <div>Goals Met: <span id="goals-met">0</span></div>
+             </div>
+        </section>
+
+        <section class="calendar-section">
+            <h2>Completion Calendar (<span id="calendar-month-year">Month Year</span>)</h2>
+            <div class="calendar-nav">
+                 <button id="prev-month">< Prev</button>
+                 <button id="next-month">Next ></button>
+             </div>
+            <div class="calendar">
+                <div class="calendar-header">Sun</div>
+                <div class="calendar-header">Mon</div>
+                <div class="calendar-header">Tue</div>
+                <div class="calendar-header">Wed</div>
+                <div class="calendar-header">Thu</div>
+                <div class="calendar-header">Fri</div>
+                <div class="calendar-header">Sat</div>
+            </div>
+            <div id="calendar-grid" class="calendar">
+                <!-- Calendar days will be loaded here by JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <script src="{{ url_for('static', filename='detail_script.js') }}"></script>
+</body>
+</html>
